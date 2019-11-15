@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-gin-base/bootstrap"
 	"go-gin-base/common"
+	"go-gin-base/config"
 	"go-gin-base/web/routes"
 	"net/http"
 	"runtime"
@@ -17,7 +18,7 @@ func initEnv()  {
 
 func newApp() *bootstrap.Bootstrapper {
 	// 初始化应用
-	app := bootstrap.New("任务调度", "xiaolin")
+	app := bootstrap.New("基础架构", "xiaolin")
 	app.Bootstrap()
 	app.Configure(routes.ApiConfigure)
 
@@ -34,7 +35,7 @@ func main ()  {
 
 func startServer (b *bootstrap.Bootstrapper)  {
 	server := &http.Server{
-		Addr:           ":8080",
+		Addr:           ":" + config.Cfg.Produce.Port,
 		Handler:        b,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
